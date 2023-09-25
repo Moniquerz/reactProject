@@ -12,7 +12,7 @@ Welcome to The Hobby Graveyard, your one-stop destination for exploring, buying,
 
 ## Introduction
 
-Briefly introduce your project here. Explain its purpose, key features, and why it exists. This section should give readers a clear understanding of what your app does.
+
 
 ## Features
 
