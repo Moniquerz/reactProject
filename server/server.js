@@ -1,23 +1,33 @@
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongoose = require('mongoose');
 
 
 const app = express();
 
-// Middleware
+//Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// Replace with your MongoDB connection string
-const db = 'YOUR_MONGODB_CONNECTION_STRING';  
+// MongoDB connection string
+const dbURI = process.env.URI
 
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+// Connect to MongoDB
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Could not connect to MongoDB:', err));
 
-// Route
+
+
+// Routes
+const users = require('./routes/api/users');
+const listings = require('./routes/api/listings');
+
+app.use('/api/users', users);
+app.use('/api/listings', listings);
+
 app.get('/', (req, res) => res.send('API Running'));
 
 const PORT = process.env.PORT || 3000;
